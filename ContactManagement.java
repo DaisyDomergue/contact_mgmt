@@ -64,7 +64,7 @@ public class ContactManagement {
             System.out.println("4. Delete Contact");
             System.out.println("5. Search Contacts");
             System.out.println("6. Sort Contacts by Name");
-//            System.out.println("7. Group Contacts by Category");
+           System.out.println("7. Group Contacts by Category");
 //            System.out.println("8. Export Contacts to CSV");
 //            System.out.println("9. Import Contacts from CSV");
 
@@ -158,10 +158,10 @@ public class ContactManagement {
                     // Sort contacts by name.
                 	manager.sortByName();
                     break;
-//                case 7:
-//                    // Group contacts by category.
-//                	manager.groupByCategory();
-//                    break;
+               case 7:
+                   // Group contacts by category.
+               	manager.groupByCategory();
+                   break;
 //                case 8:
 //                    // Export contacts to a CSV file.
 //                    System.out.print("Enter export file path: ");

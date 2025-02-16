@@ -122,14 +122,26 @@ public class ContactManager {
 		System.out.println("Contacts sorted by name.");
 	}
 
-//	public void groupByCategory() {
-//		Map<String, List<Contact>> map = new HashMap<>();
-//		
-//		// For each contact, add it to the corresponding category group(s)
-//		
-//		for (Contact c : contacts) {
-//			for (String cat : )
-//		}
-	//}
+	public void groupByCategory() {
+		Map<String, List<Contact>> map = new HashMap<>();
+		
+		// For each contact, add it to the corresponding category group(s)
+		
+		for (Contact c : contacts) {
+			for (String category : c.getCategories()) {
+				if (!map.containsKey(category)) {
+					map.put(category, new ArrayList<>());
+				}
+				map.get(category).add(c);
+			}
+		}
+		System.out.println("Contacts grouped by category:");
+		for (Map.Entry<String, List<Contact>> entry : map.entrySet()) {
+			System.out.println("Category: " + entry.getKey());
+			for (Contact c : entry.getValue()) {
+				System.out.println(c);
+			}
+		}
+	}
 }
 
