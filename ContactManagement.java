@@ -64,9 +64,9 @@ public class ContactManagement {
             System.out.println("4. Delete Contact");
             System.out.println("5. Search Contacts");
             System.out.println("6. Sort Contacts by Name");
-           System.out.println("7. Group Contacts by Category");
-//            System.out.println("8. Export Contacts to CSV");
-//            System.out.println("9. Import Contacts from CSV");
+            System.out.println("7. Group Contacts by Category");
+            System.out.println("8. Export Contacts to CSV");
+            System.out.println("9. Import Contacts from CSV");
 
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
@@ -162,18 +162,18 @@ public class ContactManagement {
                    // Group contacts by category.
                	manager.groupByCategory();
                    break;
-//                case 8:
-//                    // Export contacts to a CSV file.
-//                    System.out.print("Enter export file path: ");
-//                    String exportPath = scanner.nextLine();
-//                    manager.exportCSV(exportPath);
-//                    break;
-//                case 9:
-//                    // Import contacts from a CSV file.
-//                    System.out.print("Enter import file path: ");
-//                    String importPath = scanner.nextLine();
-//                    manager.importCSV(importPath);
-//                    break;
+               case 8:
+                   // Export contacts to a CSV file.
+                   System.out.print("Enter export file path: ");
+                   String exportPath = scanner.nextLine();
+                   manager.exportCSV(exportPath);
+                   break;
+               case 9:
+                   // Import contacts from a CSV file.
+                   System.out.print("Enter import file path: ");
+                   String importPath = scanner.nextLine();
+                   manager.importCSV(importPath);
+                   break;
                 case 0:
                     // Exit the application.
                     System.out.println("Exiting...");
