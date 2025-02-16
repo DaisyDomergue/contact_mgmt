@@ -62,6 +62,15 @@ public class ContactManager {
     	}
     	System.out.println("Contact not found.");
     }
+
+	public Contact getContactByName(String name) {
+		for (Contact c : contacts) {
+			if (c.getName().equalsIgnoreCase(name)) {
+				return c;
+			}
+		}
+		return null;
+	}
     
     public void deleteContact(String delName) {
     	

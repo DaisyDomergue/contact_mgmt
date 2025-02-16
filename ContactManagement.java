@@ -82,7 +82,12 @@ public class ContactManagement {
                 	System.out.print("Enter Name: ");
                     String name = scanner.nextLine();
                     System.out.print("Enter Phone (10 digits): ");
-                    long phoneNumber = Long.parseLong(scanner.nextLine());
+                    String phoneNumber = scanner.nextLine();
+                    while (!phoneNumber.matches("^[0-9]{10}$")) {
+                        System.out.println("Invalid phone number format. Please enter a valid phone number:");
+                        phoneNumber = scanner.nextLine();
+                    }
+                    long phone = Long.parseLong(phoneNumber);
                     System.out.print("Enter Email: ");
                     String email = scanner.nextLine();
                     while (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,8}$")) {
@@ -92,7 +97,7 @@ public class ContactManagement {
 
                  // Prompt for category selection.
                     List<String> categories = chooseCategories(scanner);
-                    manager.addContact(name, phoneNumber, email, categories);
+                    manager.addContact(name, phone, email, categories);
                     break;
                  
                 case 2:
@@ -104,20 +109,38 @@ public class ContactManagement {
                 	// Update an existing contact.
                 	System.out.print("Enter the name of the contact to update: ");
                     String oldName = scanner.nextLine();
-                    
-                    System.out.print("Enter new Name: ");
+                    Contact contact = manager.getContactByName(oldName);
+                    if (contact == null) {
+                        System.out.println("Contact not found.");
+                        break;
+                    }
+                    System.out.print("Enter new Name ("+ contact.getName()+"): ");
                     String newName = scanner.nextLine();
-                    System.out.print("Enter new Email: ");
+                    if (newName.isEmpty()) {
+                        newName = contact.getName();
+                    }
+                    System.out.print("Enter new Email ("+ contact.getEmail()+"): ");
                     String newEmail = scanner.nextLine();
-                    while (!newEmail.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,8}$")) {
+                    if (newEmail.isEmpty()) {
+                        newEmail = contact.getEmail();
+                    }
+                    while (!newEmail.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,8}$")) {
                         System.out.println("Invalid email format. Please enter a valid email:");
                         newEmail = scanner.nextLine();
                     }
-                    System.out.print("Enter new Phone (10 digits): ");
-                    long newPhoneNumber = Long.parseLong(scanner.nextLine());
+                    System.out.print("Enter new Phone (10 digits)("+ contact.getPhoneNumber()+"): ");
+                    String newPhoneNumber = scanner.nextLine();
+                    if (newPhoneNumber.isEmpty()) {
+                        newPhoneNumber = Long.toString(contact.getPhoneNumber());
+                    }
+                    while (!newPhoneNumber.matches("^[0-9]{10}$")) {
+                        System.out.println("Invalid phone number format. Please enter a valid phone number:");
+                        newEmail = scanner.nextLine();
+                    }
+                    long newPhone = Long.parseLong(newPhoneNumber);
                     // Prompt for new category selection.
                     List<String> newCategories = chooseCategories(scanner);
-                    manager.updateContact(oldName, newName, newPhoneNumber, newEmail, newCategories);
+                    manager.updateContact(oldName, newName, newPhone, newEmail, newCategories);
                     break;
                 case 4:
                     // Delete a contact.
