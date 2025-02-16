@@ -1,4 +1,4 @@
-package com.bptn.course.Project;
+package contact_mgmt;
 
 import java.util.*;
 
@@ -72,6 +72,7 @@ public class ContactManagement {
             System.out.print("Enter your choice: ");
         	
             choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
             
          // Switch-case to handle the user's menu selection.
             switch (choice) {
@@ -84,6 +85,10 @@ public class ContactManagement {
                     long phoneNumber = Long.parseLong(scanner.nextLine());
                     System.out.print("Enter Email: ");
                     String email = scanner.nextLine();
+                    while (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,8}$")) {
+                        System.out.println("Invalid email format "+ email +". Please enter a valid email:");
+                        email = scanner.nextLine();
+                    }
 
                  // Prompt for category selection.
                     List<String> categories = chooseCategories(scanner);
@@ -104,6 +109,10 @@ public class ContactManagement {
                     String newName = scanner.nextLine();
                     System.out.print("Enter new Email: ");
                     String newEmail = scanner.nextLine();
+                    while (!newEmail.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,8}$")) {
+                        System.out.println("Invalid email format. Please enter a valid email:");
+                        newEmail = scanner.nextLine();
+                    }
                     System.out.print("Enter new Phone (10 digits): ");
                     long newPhoneNumber = Long.parseLong(scanner.nextLine());
                     // Prompt for new category selection.

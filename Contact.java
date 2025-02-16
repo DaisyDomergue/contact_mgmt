@@ -1,4 +1,4 @@
-package com.bptn.course.Project;
+package contact_mgmt;
 
 import java.util.ArrayList;
 import java.util.List;
