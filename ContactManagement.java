@@ -79,21 +79,9 @@ public class ContactManagement {
                 case 1:
                 	// Add a new contact.
                 	
-                	System.out.print("Enter Name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter Phone (10 digits): ");
-                    String phoneNumber = scanner.nextLine();
-                    while (!phoneNumber.matches("^[0-9]{10}$")) {
-                        System.out.println("Invalid phone number format. Please enter a valid phone number:");
-                        phoneNumber = scanner.nextLine();
-                    }
-                    long phone = Long.parseLong(phoneNumber);
-                    System.out.print("Enter Email: ");
-                    String email = scanner.nextLine();
-                    while (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,8}$")) {
-                        System.out.println("Invalid email format "+ email +". Please enter a valid email:");
-                        email = scanner.nextLine();
-                    }
+                	String name = getName(scanner);
+                    long phone = getPhone(scanner);
+                    String email = getEmail(scanner);
 
                  // Prompt for category selection.
                     List<String> categories = chooseCategories(scanner);
@@ -114,30 +102,9 @@ public class ContactManagement {
                         System.out.println("Contact not found.");
                         break;
                     }
-                    System.out.print("Enter new Name ("+ contact.getName()+"): ");
-                    String newName = scanner.nextLine();
-                    if (newName.isEmpty()) {
-                        newName = contact.getName();
-                    }
-                    System.out.print("Enter new Email ("+ contact.getEmail()+"): ");
-                    String newEmail = scanner.nextLine();
-                    if (newEmail.isEmpty()) {
-                        newEmail = contact.getEmail();
-                    }
-                    while (!newEmail.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,8}$")) {
-                        System.out.println("Invalid email format. Please enter a valid email:");
-                        newEmail = scanner.nextLine();
-                    }
-                    System.out.print("Enter new Phone (10 digits)("+ contact.getPhoneNumber()+"): ");
-                    String newPhoneNumber = scanner.nextLine();
-                    if (newPhoneNumber.isEmpty()) {
-                        newPhoneNumber = Long.toString(contact.getPhoneNumber());
-                    }
-                    while (!newPhoneNumber.matches("^[0-9]{10}$")) {
-                        System.out.println("Invalid phone number format. Please enter a valid phone number:");
-                        newEmail = scanner.nextLine();
-                    }
-                    long newPhone = Long.parseLong(newPhoneNumber);
+                    String newName = getNewName(scanner, contact);
+                    String newEmail = getNewEmail(scanner, contact);
+                    Long newPhone = getPhone(scanner,contact);
                     // Prompt for new category selection.
                     List<String> newCategories = chooseCategories(scanner);
                     manager.updateContact(oldName, newName, newPhone, newEmail, newCategories);
@@ -186,7 +153,69 @@ public class ContactManagement {
         } while (choice != 0); // Continue looping until the user chooses to exit.
 
             
+    }
+
+    private static String getNewEmail(Scanner scanner, Contact contact) {
+        System.out.print("Enter new Email ("+ contact.getEmail()+"): ");
+        String newEmail = scanner.nextLine();
+        if (newEmail.isEmpty()) {
+            newEmail = contact.getEmail();
+        }
+        while (!newEmail.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,8}$")) {
+            System.out.println("Invalid email format. Please enter a valid email:");
+            newEmail = scanner.nextLine();
+        }
+        return newEmail;
+    }
+
+    private static String getNewName(Scanner scanner, Contact contact) {
+        System.out.print("Enter new Name ("+ contact.getName()+"): ");
+        String newName = scanner.nextLine();
+        if (newName.isEmpty()) {
+            newName = contact.getName();
+        }
+        return newName;
+    }
+
+    private static String getEmail(Scanner scanner) {
+        System.out.print("Enter Email: ");
+        String email = scanner.nextLine();
+        while (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,8}$")) {
+            System.out.println("Invalid email format "+ email +". Please enter a valid email:");
+            email = scanner.nextLine();
+        }
+        return email;
+    }
+
+    private static long getPhone(Scanner scanner) {
+        System.out.print("Enter Phone (10 digits): ");
+        String phoneNumber = scanner.nextLine();
+        while (!phoneNumber.matches("^[0-9]{10}$")) {
+            System.out.println("Invalid phone number format. Please enter a valid phone number:");
+            phoneNumber = scanner.nextLine();
+        }
+        long phone = Long.parseLong(phoneNumber);
+        return phone;
+    }
+
+    private static String getName(Scanner scanner) {
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
+        return name;
     }   
+    private static Long getPhone(Scanner scanner, Contact contact) {
+        System.out.print("Enter new Phone (10 digits)("+ contact.getPhoneNumber()+"): ");
+        String newPhoneNumber = scanner.nextLine();
+        if (newPhoneNumber.isEmpty()) {
+            newPhoneNumber = Long.toString(contact.getPhoneNumber());
+        }
+        while (!newPhoneNumber.matches("^[0-9]{10}$")) {
+            System.out.println("Invalid phone number format. Please enter a valid phone number:");
+            newPhoneNumber = scanner.nextLine();
+        }
+        long newPhone = Long.parseLong(newPhoneNumber);
+        return newPhone;
+    }
 }
         
             
